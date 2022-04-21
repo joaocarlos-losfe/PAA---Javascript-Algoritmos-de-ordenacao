@@ -11,8 +11,11 @@
     tempo de ordenação dos números.
 */
 
+
 const gerarArrayDeNumeros = (tipo_de_geracao, quantidade) => 
 {
+    console.log("Gerando array...")
+
     let arr = [];
 
     const piorCaso = () => 
@@ -39,6 +42,8 @@ const gerarArrayDeNumeros = (tipo_de_geracao, quantidade) =>
         case "melhor caso" : melhorCaso(); break;
         case "caso aleatorio": casoAleatorio(); break;
     }
+
+    console.log("geração finalizada...")
 
     return arr;
 }
@@ -168,7 +173,18 @@ const startMain = () =>
     //console.log(`Merge sort: ${mergeSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
     //console.log(`bucket sort: ${buckteSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
 
-    //let res = gerarArrayDeNumeros("melhor caso", 1000)
+    let array = gerarArrayDeNumeros("pior caso", 200000)
+
+    console.log("execuntando função de ordenação...")
+
+    const tempo_inicial = performance.now();
+    
+    bubbleSort(array)
+
+    const tempo_final = performance.now() - tempo_inicial;
+
+    console.log("tempo de execução: " + tempo_final + "ms ou " + ((tempo_final/1000) % 60) + " segundos")
+
 }
 
 startMain()
