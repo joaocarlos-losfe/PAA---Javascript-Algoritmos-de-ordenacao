@@ -173,17 +173,17 @@ const startMain = () =>
     //console.log(`Merge sort: ${mergeSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
     //console.log(`bucket sort: ${buckteSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
 
-    let array = gerarArrayDeNumeros("pior caso", 200000)
+    let array = gerarArrayDeNumeros("pior caso", 50000)
 
     console.log("execuntando função de ordenação...")
 
     const tempo_inicial = performance.now();
     
-    bubbleSort(array)
+    buckteSort(array)
 
     const tempo_final = performance.now() - tempo_inicial;
 
-    console.log("tempo de execução: " + tempo_final + "ms ou " + ((tempo_final/1000) % 60) + " segundos")
+    console.log("tempo de execução: " + tempo_final + " millisegundos ou " + ((tempo_final/1000) % 60).toFixed(2) + " segundos")
 
 }
 
