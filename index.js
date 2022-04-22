@@ -4,7 +4,7 @@
     deve implementar os algoritmos e comparar os tempos
     de execução dos algoritmos obtidos no pior caso, 
     melhor caso e um caso aleatório, utilizando um 
-    conjunto de dados contendo 50.000, 100.000 e 
+    conjunto de dados contendo 50.000, "cinquenta mil"00.000 e 
     500.000 números gerados. Por isso, deve ser 
     implementada uma função ou método para gerar números 
     aleatórios e uma função ou método para contar o 
@@ -12,11 +12,8 @@
 */
 
 
-
-const gerarArray = (tipo_de_geracao, quantidade) => 
+const gerarArray = (caso, quantidade) => 
 {
-    console.log("Gerando array...")
-
     let arr = [];
 
     const piorCaso = () => 
@@ -37,14 +34,12 @@ const gerarArray = (tipo_de_geracao, quantidade) =>
             arr.push( Math.floor(Math.random() * 1000000))
     }
 
-    switch(tipo_de_geracao)
+    switch(caso)
     {
         case "pior caso": piorCaso(); break;
         case "melhor caso" : melhorCaso(); break;
         case "caso aleatorio": casoAleatorio(); break;
     }
-
-    console.log("geração finalizada...")
 
     return arr;
 }
@@ -168,214 +163,98 @@ const bubbleSort = (array) =>
     return array;
 }
 
+
 const rodarTeste = () => 
 {
-    const conjuntoDeDados = 
-    {
-        1: 50000,
-        2: 100000,
-        3: 500000
-    };
 
+    
     const resultados = 
     {
         "pior caso":{
             "buckte sort" : [],
             "merge sort": [],
-            "buble sort": []
+            "bubble sort": []
         },
 
         "melhor caso":{
             "buckte sort" : [],
             "merge sort": [],
-            "buble sort": []
+            "bubble sort": []
         },
 
         "caso aleatorio":{
             "buckte sort" : [],
             "merge sort": [],
-            "buble sort": []
+            "bubble sort": []
         }
     }
 
-    console.log("bucket sort")
+    const caso_de_teste = ["pior caso", "melhor caso", "caso aleatorio"];
+    const algoritmos = ["buckte sort", "merge sort", "bubble sort"]
+    const numero_de_dados = [25000, 50000, 100000]
+    
+    caso_de_teste.map(caso => 
+    {
+        console.log(`\n${caso}`)
 
-    let arr = gerarArray("pior caso", conjuntoDeDados[1])
-    let inicio = performance.now()
-    buckteSort(arr)
-    resultados["pior caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+        algoritmos.map(algoritmo => 
+        {
+            console.log(`\n   ${algoritmo}`)
+            switch (algoritmo)
+            {
+                case "buckte sort":
 
-    arr = gerarArray("pior caso", conjuntoDeDados[2])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["pior caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+                    numero_de_dados.map(quantidade =>
+                    {
+                        const array = gerarArray(caso, quantidade)
+                        const tempo_inicial = performance.now()
+                        
+                        buckteSort(array)
+                       
+                        const tempo_final = `${(performance.now() - tempo_inicial).toFixed(2)}ms`
+                        resultados[caso][algoritmo].push(tempo_final)
 
-    arr = gerarArray("pior caso", conjuntoDeDados[3])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["pior caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-    //---------------
+                        console.log(`       ${quantidade}`)
+                    })
 
-    arr = gerarArray("melhor caso", conjuntoDeDados[1])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["melhor caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+                    break;
+                
+                case "merge sort":
+                    numero_de_dados.map(quantidade =>
+                    {
+                        const array = gerarArray(caso, quantidade)
+                        const tempo_inicial = performance.now()
+                        
+                        mergeSort(array)
 
-    arr = gerarArray("melhor caso", conjuntoDeDados[2])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["melhor caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+                        const tempo_final = `${(performance.now() - tempo_inicial).toFixed(2)}ms`
+                        resultados[caso][algoritmo].push(tempo_final)
 
-    arr = gerarArray("melhor caso", conjuntoDeDados[3])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["melhor caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+                        console.log(`       ${quantidade}`)
+                    })
+                    break;
+                
+                case "bubble sort":
+                    numero_de_dados.map(quantidade =>
+                    {
+                        let array = gerarArray(caso, quantidade)
+                        const tempo_inicial = performance.now()
+                        
+                        bubbleSort(array)
 
-    //-------------
+                        const tempo_final = `${(performance.now() - tempo_inicial).toFixed(2)}ms`
+                        resultados[caso][algoritmo].push(tempo_final)
 
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[1])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["caso aleatorio"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+                        console.log(`       ${quantidade}`)
+                    })
+                    break;
+            }
 
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[2])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["caso aleatorio"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[3])
-    inicio = performance.now()
-    buckteSort(arr)
-    resultados["caso aleatorio"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    console.log("merge sort")
-
-    arr = gerarArray("pior caso", conjuntoDeDados[1])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["pior caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("pior caso", conjuntoDeDados[2])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["pior caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("pior caso", conjuntoDeDados[3])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["pior caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-    //---------------
-
-    arr = gerarArray("melhor caso", conjuntoDeDados[1])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["melhor caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("melhor caso", conjuntoDeDados[2])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["melhor caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("melhor caso", conjuntoDeDados[3])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["melhor caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    //-------------
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[1])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["caso aleatorio"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[2])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["caso aleatorio"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[3])
-    inicio = performance.now()
-    mergeSort(arr)
-    resultados["caso aleatorio"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    console.log("bubble sort") //<-------------------
-
-    arr = gerarArray("pior caso", conjuntoDeDados[1])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["pior caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("pior caso", conjuntoDeDados[2])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["pior caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("pior caso", conjuntoDeDados[3])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["pior caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-    //---------------
-
-    arr = gerarArray("melhor caso", conjuntoDeDados[1])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["melhor caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("melhor caso", conjuntoDeDados[2])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["melhor caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("melhor caso", conjuntoDeDados[3])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["melhor caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    //-------------
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[1])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["caso aleatorio"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[2])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["caso aleatorio"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
-    arr = gerarArray("caso aleatorio", conjuntoDeDados[3])
-    inicio = performance.now()
-    bubbleSort(arr)
-    resultados["caso aleatorio"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
-
+        })
+    })
     
     console.table(resultados)
+
 }
 
-const startMain = () =>
-{
-    
-    /**
-    //console.log(`bubble sort: ${bubbleSort([1,9,2,3,7,6,4,5,5])}`)
-    //console.log(`Merge sort: ${mergeSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
-    //console.log(`bucket sort: ${buckteSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
-
-    let array = gerarArray("pior caso", 50000)
-
-    console.log("execuntando função de ordenação...")
-
-    const tempo_inicial = performance.now();
-    
-    buckteSort(array)
-
-    const tempo_final = performance.now() - tempo_inicial;
-
-    console.log("tempo de execução: " + tempo_final + " millisegundos ou " + ((tempo_final/1000) % 60).toFixed(2) + " segundos")
-     */
-
-    rodarTeste()
-
-    
-}
-
-startMain()
+rodarTeste()
