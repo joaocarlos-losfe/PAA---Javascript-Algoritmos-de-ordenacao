@@ -12,7 +12,8 @@
 */
 
 
-const gerarArrayDeNumeros = (tipo_de_geracao, quantidade) => 
+
+const gerarArray = (tipo_de_geracao, quantidade) => 
 {
     console.log("Gerando array...")
 
@@ -167,13 +168,199 @@ const bubbleSort = (array) =>
     return array;
 }
 
+const rodarTeste = () => 
+{
+    const conjuntoDeDados = 
+    {
+        1: 50000,
+        2: 100000,
+        3: 500000
+    };
+
+    const resultados = 
+    {
+        "pior caso":{
+            "buckte sort" : [],
+            "merge sort": [],
+            "buble sort": []
+        },
+
+        "melhor caso":{
+            "buckte sort" : [],
+            "merge sort": [],
+            "buble sort": []
+        },
+
+        "caso aleatorio":{
+            "buckte sort" : [],
+            "merge sort": [],
+            "buble sort": []
+        }
+    }
+
+    console.log("bucket sort")
+
+    let arr = gerarArray("pior caso", conjuntoDeDados[1])
+    let inicio = performance.now()
+    buckteSort(arr)
+    resultados["pior caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("pior caso", conjuntoDeDados[2])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["pior caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("pior caso", conjuntoDeDados[3])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["pior caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+    //---------------
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[1])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["melhor caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[2])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["melhor caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[3])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["melhor caso"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    //-------------
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[1])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["caso aleatorio"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[2])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["caso aleatorio"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[3])
+    inicio = performance.now()
+    buckteSort(arr)
+    resultados["caso aleatorio"]["buckte sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    console.log("merge sort")
+
+    arr = gerarArray("pior caso", conjuntoDeDados[1])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["pior caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("pior caso", conjuntoDeDados[2])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["pior caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("pior caso", conjuntoDeDados[3])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["pior caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+    //---------------
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[1])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["melhor caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[2])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["melhor caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[3])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["melhor caso"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    //-------------
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[1])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["caso aleatorio"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[2])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["caso aleatorio"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[3])
+    inicio = performance.now()
+    mergeSort(arr)
+    resultados["caso aleatorio"]["merge sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    console.log("bubble sort") //<-------------------
+
+    arr = gerarArray("pior caso", conjuntoDeDados[1])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["pior caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("pior caso", conjuntoDeDados[2])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["pior caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("pior caso", conjuntoDeDados[3])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["pior caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+    //---------------
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[1])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["melhor caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[2])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["melhor caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("melhor caso", conjuntoDeDados[3])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["melhor caso"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    //-------------
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[1])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["caso aleatorio"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[2])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["caso aleatorio"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    arr = gerarArray("caso aleatorio", conjuntoDeDados[3])
+    inicio = performance.now()
+    bubbleSort(arr)
+    resultados["caso aleatorio"]["buble sort"].push(`${ ((performance.now() - inicio).toFixed(2))} ms`)
+
+    
+    console.table(resultados)
+}
+
 const startMain = () =>
 {
+    
+    /**
     //console.log(`bubble sort: ${bubbleSort([1,9,2,3,7,6,4,5,5])}`)
     //console.log(`Merge sort: ${mergeSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
     //console.log(`bucket sort: ${buckteSort([10, -1, 2, 5, 0, 6, 4, -5])}`)
 
-    let array = gerarArrayDeNumeros("pior caso", 50000)
+    let array = gerarArray("pior caso", 50000)
 
     console.log("execuntando função de ordenação...")
 
@@ -184,7 +371,11 @@ const startMain = () =>
     const tempo_final = performance.now() - tempo_inicial;
 
     console.log("tempo de execução: " + tempo_final + " millisegundos ou " + ((tempo_final/1000) % 60).toFixed(2) + " segundos")
+     */
 
+    rodarTeste()
+
+    
 }
 
 startMain()
